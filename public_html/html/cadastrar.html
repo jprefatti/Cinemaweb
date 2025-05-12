@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastrar Filme</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Cadastro de filmes -->
+  <h1>Cadastro de Filme</h1>
+  <form id="filmeForm" novalidate>
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required minlength="2">
+    <span class="error" id="erro-titulo"></span>
+
+    <label for="sinopse">Sinopse:</label>
+    <textarea id="sinopse" name="sinopse" required minlength="10"></textarea>
+    <span class="error" id="erro-sinopse"></span>
+
+    <label for="genero">Gênero:</label>
+    <input type="text" id="genero" name="genero" required>
+    <span class="error" id="erro-genero"></span>
+
+    <label for="ano">Ano de Lançamento:</label>
+    <input type="number" id="ano" name="ano" required min="1900" max="2025">
+    <span class="error" id="erro-ano"></span>
+
+    <button type="submit">Salvar</button>
+  </form>
+  <a href="index.html">Voltar</a>
+  <script src="../js/validation.js"></script>
+</body>
+</html>
