@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Filmes Cadastrados</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-  <header>
+<body class="p-4">
+  <header class="mb-4">
     <h1>Filmes Cadastrados</h1>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="cadastrar.html">Novo Filme</a>
+      <a th:href="@{/filmes}" class="btn btn-outline-primary mr-2">Home</a>
+      <a th:href="@{/filmes/cadastrar}" class="btn btn-success">Novo Filme</a>
     </nav>
   </header>
 
-    <!-- Tabela filmes -->
-  <table id="filmes-table">
-  <thead> … </thead>
-  <tbody>
-    <tr th:each="filme : ${filmes}">
-      <td th:text="${filme.titulo}"></td>
-      <td>
-        <a th:href="@{/filmes/{id}(id=${filme.id})}">Detalhes</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table id="filmes-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Gênero</th>
+        <th>Ano</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="filme : ${filmes}">
+        <td th:text="${filme.titulo}"></td>
+        <td th:text="${filme.genero}"></td>
+        <td th:text="${filme.anoLancamento}"></td>
+        <td>
+          <a th:href="@{/filmes/{id}(id=${filme.id})}" class="btn btn-info btn-sm mr-1">Detalhes</a>
+          <a th:href="@{/filmes/editar/{id}(id=${filme.id})}" class="btn btn-primary btn-sm mr-1">Editar</a>
+          <a th:href="@{/filmes/excluir/{id}(id=${filme.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Excluir filme?')">Excluir</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
+  <script src="/js/script.js"></script>
 </body>
 </html>
