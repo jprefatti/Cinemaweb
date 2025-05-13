@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${filme.titulo}">Detalhes do Filme</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+  <h1 th:text="${filme.titulo}"></h1>
+  <p><strong>Sinopse:</strong> <span th:text="${filme.sinopse}"></span></p>
+  <p><strong>Gênero:</strong> <span th:text="${filme.genero}"></span></p>
+  <p><strong>Ano:</strong> <span th:text="${filme.anoLancamento}"></span></p>
+
+  <hr>
+  <h2>Análises</h2>
+  <div th:if="${#lists.isEmpty(analises)}">
+    <p>Não há análises para este filme.</p>
+  </div>
+  <div th:each="a : ${analises}" class="border rounded p-3 mb-2">
+    <p th:text="${a.analise}"></p>
+    <p><strong>Nota:</strong> <span th:text="${a.nota}"></span></p>
+  </div>
+
+  <h3>Nova Análise</h3>
+  <form th:action="@{/analises/{filmeId}(filmeId=${filme.id})}" th:object="${analise}" method="post">
+    <div class="form-group">
+      <label for="analise">Comentário</label>
+      <textarea th:field="*{analise}" id="analise" class="form-control" placeholder="Sua análise" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="nota">Nota (1-5)</label>
+      <input type="number" th:field="*{nota}" id="nota" class="form-control" min="1" max="5" required>
+    </div>
+    <button type="submit" class="btn btn-success">Enviar</button>
+    <a th:href="@{/filmes}" class="btn btn-secondary">Voltar</a>
+  </form>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
